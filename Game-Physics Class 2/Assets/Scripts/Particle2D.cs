@@ -8,6 +8,7 @@ public class Particle2D : MonoBehaviour
     public Vector2 velocity;
     public Vector2 acceleration;
 
+    private float startTime;
 
     public float rotation;
     public float angularVelocity;
@@ -58,7 +59,7 @@ public class Particle2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -88,13 +89,14 @@ public class Particle2D : MonoBehaviour
             //Save time when object instantiated
             //subtract that time from current time
             //do sin of created time onto x and y pos
-
+            acceleration.x = -Mathf.Sin(Time.time - startTime);
+            acceleration.y = Mathf.Cos(Time.time - startTime);
         }
 
         transform.position = position;
 
         transform.eulerAngles = new Vector3(0f,0f,rotation);
 
-        acceleration.x = -Mathf.Sin(Time.time);
+        
     }
 }

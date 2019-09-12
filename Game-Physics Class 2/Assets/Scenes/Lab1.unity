@@ -476,6 +476,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 557391038397424439, guid: 0b92b2500eff79d41a0a1f9c7f879395,
+        type: 3}
+      propertyPath: circtype
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 557391038397424439, guid: 0b92b2500eff79d41a0a1f9c7f879395,
+        type: 3}
+      propertyPath: acceleration.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 557391038397424439, guid: 0b92b2500eff79d41a0a1f9c7f879395,
+        type: 3}
+      propertyPath: velocity.x
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b92b2500eff79d41a0a1f9c7f879395, type: 3}
 --- !u!1001 &1513065313
@@ -549,6 +564,16 @@ PrefabInstance:
         type: 3}
       propertyPath: phystype
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510007246539784172, guid: 055210dd7fb9c0949a981874b611d731,
+        type: 3}
+      propertyPath: circtype
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510007246539784172, guid: 055210dd7fb9c0949a981874b611d731,
+        type: 3}
+      propertyPath: acceleration.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 055210dd7fb9c0949a981874b611d731, type: 3}
