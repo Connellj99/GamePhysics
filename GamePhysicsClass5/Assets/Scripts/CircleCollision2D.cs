@@ -14,6 +14,11 @@ public class CircleCollision2D : MonoBehaviour
         center = attachedShape.transform.position;
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(center, radius);
+    }
+
     // Update is called once per frame
     void Update()
     {

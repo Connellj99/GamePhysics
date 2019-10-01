@@ -7,7 +7,7 @@ public class ObjectBoundingBoxCollision2D : MonoBehaviour
 
     public Vector2 posMin;
     public Vector2 posMax;
-    public float zRot;
+    public float zRot = 0.0f;
 
     // Start is called before the first frame update
     void Start()
