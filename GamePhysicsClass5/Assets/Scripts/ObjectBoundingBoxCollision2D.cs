@@ -13,6 +13,12 @@ public class ObjectBoundingBoxCollision2D : MonoBehaviour
     public Vector2 xNormal;
     public Vector2 yNormal;
     public Vector2 halfLength;
+
+    public Vector2 posMin;
+    public Vector2 posMax;
+
+
+
     public float zRot = 0.0f;
 
 
@@ -33,6 +39,9 @@ public class ObjectBoundingBoxCollision2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
         center = attachedShape.transform.position;
         botLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
         botRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
@@ -40,5 +49,9 @@ public class ObjectBoundingBoxCollision2D : MonoBehaviour
         topLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, halfLength.y) +new Vector3(center.x, center.y);
         xNormal = Quaternion.Euler(0, 0, zRot) * new Vector3(1, 0, 0).normalized;
         yNormal = Quaternion.Euler(0, 0, zRot) * new Vector3(0, 1, 0).normalized;
+
+        posMin = botLeft;
+        posMax = topRight;
+
     }
 }

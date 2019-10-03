@@ -7,6 +7,8 @@ public class AxisAllignedBoundingBoxCollision2D : MonoBehaviour
 
     public Vector2 posMin;
     public Vector2 posMax;
+    public Vector2 leftTop;
+    public Vector2 rightBot;
     public GameObject rect;
     public Vector2 center;
     //public Vector2 halfLength;
@@ -28,13 +30,18 @@ public class AxisAllignedBoundingBoxCollision2D : MonoBehaviour
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawLine(right, left);
+        /*Gizmos.DrawLine(right, left);
         Gizmos.DrawLine(right,bot);
-        Gizmos.DrawLine(right, top);
-        Gizmos.DrawLine(left, bot);
         Gizmos.DrawLine(left, top);
-        Gizmos.DrawLine(top, bot);
+        Gizmos.DrawLine(top, bot);*/
+        Gizmos.DrawLine(rightBot, posMax);
+        Gizmos.DrawLine(leftTop, posMin);
+        Gizmos.DrawLine(leftTop, posMax);
+        Gizmos.DrawLine(rightBot, posMin);
 
+
+
+        //Gizmos.DrawLine(posMin, posMax);
 
     }
 
@@ -48,8 +55,10 @@ public class AxisAllignedBoundingBoxCollision2D : MonoBehaviour
         top = new Vector2(center.x, center.y + (0.5f * rectTopBot));
         bot = new Vector2(center.x, center.y - (0.5f * rectTopBot));
 
-        posMin = new Vector2(right.x, top.y);
-        posMax = new Vector2(left.x, bot.y);
+        posMax = new Vector2(right.x, top.y);
+        posMin = new Vector2(left.x, bot.y);
+        leftTop = new Vector2(left.x, top.y);
+        rightBot = new Vector2(right.x, bot.y);
 
     }
 }

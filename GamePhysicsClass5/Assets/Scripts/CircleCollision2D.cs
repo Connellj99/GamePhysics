@@ -6,7 +6,7 @@ public class CircleCollision2D : MonoBehaviour
 {
     public GameObject attachedShape;
     public float radius;
-    public Vector2 center;
+    public Vector2 center = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class CircleCollision2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        center = attachedShape.transform.position;
+
     }
 }

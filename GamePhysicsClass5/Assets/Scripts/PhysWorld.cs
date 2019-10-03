@@ -6,17 +6,48 @@ public class PhysWorld : MonoBehaviour
 {
     public static int objectAmount = 3;
     public GameObject[] physObjects = new GameObject[objectAmount];
-
+    public GameObject test1;
+    public GameObject test2;
+    public GameObject test3;
+    public GameObject test4;
+    public GameObject test5;
+    public GameObject test6;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        CheckCollisions();
+        //CheckCollisions();
+        if (CollisionHull2D.AABBAABB(test3.GetComponent<AxisAllignedBoundingBoxCollision2D>(), test4.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+        {
+            Debug.Log("Collision AABB AABB");
+        }
+        if (CollisionHull2D.CircleCircle(test1.GetComponent<CircleCollision2D>(), test2.GetComponent<CircleCollision2D>()))
+        {
+            Debug.Log("Collision Circ Circ");
+        }
+        if (CollisionHull2D.CircleAABB(test1.GetComponent<CircleCollision2D>(), test3.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+        {
+            Debug.Log("Collision Circ AABB");
+
+
+        }
+        if(CollisionHull2D.AABBOBB(test3.GetComponent<AxisAllignedBoundingBoxCollision2D>(), test5.GetComponent<ObjectBoundingBoxCollision2D>()))
+        {
+            Debug.Log("Collision AABB OBB");
+
+        }
+        if (CollisionHull2D.CircleOBB(test2.GetComponent<CircleCollision2D>(), test6.GetComponent<ObjectBoundingBoxCollision2D>()))
+        {
+            Debug.Log("Collision Circ OBB");
+        }
+
+
+
     }
 
     /*
@@ -25,7 +56,7 @@ public class PhysWorld : MonoBehaviour
      * 
      * 
      */
-     void CheckCollisions()
+    void CheckCollisions()
      {
         int currentShape = 0;
         for(int i = currentShape; i < objectAmount; i++)
@@ -71,13 +102,19 @@ public class PhysWorld : MonoBehaviour
                     if (newHullDetect == CollisionHull2D.PhysDetect.Circle)
                     {
                         //AABB Circle
-                        CollisionHull2D.CircleAABB(physObjects[j].GetComponent<CircleCollision2D>(), physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>());
+                        if(CollisionHull2D.CircleAABB(physObjects[j].GetComponent<CircleCollision2D>(), physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+                        {
+                            Debug.Log("Collision");
+                        }
 
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.AABB)
                     {
                         //AABB AABB
-                        CollisionHull2D.AABBAABB(physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>(), physObjects[j].GetComponent<AxisAllignedBoundingBoxCollision2D>());
+                        if(CollisionHull2D.AABBAABB(physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>(), physObjects[j].GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+                        {
+                            Debug.Log("Collision");
+                        }
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.OBB)
                     {
