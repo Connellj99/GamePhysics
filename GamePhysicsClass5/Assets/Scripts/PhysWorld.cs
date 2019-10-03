@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhysWorld : MonoBehaviour
 {
-    public static int objectAmount = 6;
+    public static int objectAmount = 3;
     public GameObject[] physObjects = new GameObject[objectAmount];
 
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class PhysWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckCollisions();
     }
 
     /*
@@ -39,14 +39,27 @@ public class PhysWorld : MonoBehaviour
                     if (newHullDetect == CollisionHull2D.PhysDetect.Circle)
                     {
                         //Circle Circle
+                        if(CollisionHull2D.CircleCircle(physObjects[i].GetComponent<CircleCollision2D>(), physObjects[j].GetComponent<CircleCollision2D>()))
+                        {
+                            Debug.Log("Collision");
+                        }
+                        
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.AABB)
                     {
                         //Circle AABB
+                        if(CollisionHull2D.CircleAABB(physObjects[i].GetComponent<CircleCollision2D>(), physObjects[j].GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+                        {
+                            Debug.Log("Collision");
+
+                        }
+
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.OBB)
                     {
                         //Circle OBB
+                        CollisionHull2D.CircleOBB(physObjects[i].GetComponent<CircleCollision2D>(), physObjects[j].GetComponent<ObjectBoundingBoxCollision2D>());
+
                     }
                 }
             }
@@ -58,14 +71,19 @@ public class PhysWorld : MonoBehaviour
                     if (newHullDetect == CollisionHull2D.PhysDetect.Circle)
                     {
                         //AABB Circle
+                        CollisionHull2D.CircleAABB(physObjects[j].GetComponent<CircleCollision2D>(), physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>());
+
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.AABB)
                     {
                         //AABB AABB
+                        CollisionHull2D.AABBAABB(physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>(), physObjects[j].GetComponent<AxisAllignedBoundingBoxCollision2D>());
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.OBB)
                     {
                         //AABB OBB
+                        CollisionHull2D.AABBOBB(physObjects[i].GetComponent<AxisAllignedBoundingBoxCollision2D>(), physObjects[j].GetComponent<ObjectBoundingBoxCollision2D>());
+
                     }
                 }
             }
@@ -77,14 +95,20 @@ public class PhysWorld : MonoBehaviour
                     if (newHullDetect == CollisionHull2D.PhysDetect.Circle)
                     {
                         //OBB Circle
+                        CollisionHull2D.CircleOBB(physObjects[j].GetComponent<CircleCollision2D>(), physObjects[i].GetComponent<ObjectBoundingBoxCollision2D>());
+
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.AABB)
                     {
                         //OBB AABB
+                        CollisionHull2D.AABBOBB(physObjects[j].GetComponent<AxisAllignedBoundingBoxCollision2D>(), physObjects[i].GetComponent<ObjectBoundingBoxCollision2D>());
+
                     }
                     else if (newHullDetect == CollisionHull2D.PhysDetect.OBB)
                     {
                         //OBB OBB
+                        CollisionHull2D.OBBOBB(physObjects[i].GetComponent<ObjectBoundingBoxCollision2D>(), physObjects[j].GetComponent<ObjectBoundingBoxCollision2D>());
+
                     }
                 }
             }

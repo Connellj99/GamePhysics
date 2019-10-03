@@ -21,19 +21,28 @@ public class AxisAllignedBoundingBoxCollision2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        center = rect.transform.position;
        
 
     }
 
     public void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(center, new Vector3(rectLeftRight, rectTopBot, 2.0f));
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(right, left);
+        Gizmos.DrawLine(right,bot);
+        Gizmos.DrawLine(right, top);
+        Gizmos.DrawLine(left, bot);
+        Gizmos.DrawLine(left, top);
+        Gizmos.DrawLine(top, bot);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        center = rect.transform.position;
+
         left = new Vector2(center.x - (0.5f * rectLeftRight), center.y);
         right = new Vector2(center.x + (0.5f * rectLeftRight), center.y);
         top = new Vector2(center.x, center.y + (0.5f * rectTopBot));

@@ -111,7 +111,7 @@ public class CollisionHull2D : MonoBehaviour
         return distanceSquared < (circle.radius * circle.radius);
     }
 
-    static public bool CircleOBB(CollisionHull2D colA, CollisionHull2D colB)
+    static public bool CircleOBB(CircleCollision2D circle, ObjectBoundingBoxCollision2D rect)
     {
 
         return false;
@@ -139,13 +139,13 @@ public class CollisionHull2D : MonoBehaviour
     }
 
 
-    static public bool AABBOBB(CollisionHull2D colA, CollisionHull2D colB)
+    static public bool AABBOBB(AxisAllignedBoundingBoxCollision2D axisRect, ObjectBoundingBoxCollision2D objRect)
     {
         //AxisAllignedBoundingBoxCollision2D 
         return false;
     }
 
-    static public bool OBBOBB(CollisionHull2D colA, CollisionHull2D colB)
+    static public bool OBBOBB(ObjectBoundingBoxCollision2D rectA, ObjectBoundingBoxCollision2D rectB)
     {
 
         return false;
