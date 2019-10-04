@@ -24,7 +24,7 @@ public class ObjectBoundingBoxCollision2D : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.green;
         Gizmos.DrawLine(botLeft, topLeft);
         Gizmos.DrawLine(botLeft, botRight);
         Gizmos.DrawLine(topLeft, topRight);

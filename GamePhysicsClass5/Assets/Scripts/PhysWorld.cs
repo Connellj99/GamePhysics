@@ -45,7 +45,11 @@ public class PhysWorld : MonoBehaviour
         {
             Debug.Log("Collision Circ OBB");
         }
+        if (CollisionHull2D.OBBOBB(test5.GetComponent<ObjectBoundingBoxCollision2D>(), test6.GetComponent<ObjectBoundingBoxCollision2D>()))
+        {
+            Debug.Log("Collision OBB OBB");
 
+        }
 
 
     }
