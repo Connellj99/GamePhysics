@@ -232,19 +232,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd58442ecae5fab40879d7486c4f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physObjects:
-  - {fileID: 1194746477}
-  - {fileID: 1638113780}
-  - {fileID: 814966635}
-  - {fileID: 102284327}
-  - {fileID: 1929336198}
-  - {fileID: 652782468}
-  test1: {fileID: 1638113780}
-  test2: {fileID: 1929336198}
-  test3: {fileID: 1194746477}
-  test4: {fileID: 102284327}
-  test5: {fileID: 814966635}
-  test6: {fileID: 652782468}
+  circle1: {fileID: 1638113780}
+  circle2: {fileID: 1929336198}
+  aabb1: {fileID: 1194746477}
+  aabb2: {fileID: 102284327}
+  obb1: {fileID: 814966635}
+  obb2: {fileID: 652782468}
 --- !u!1 &652782468
 GameObject:
   m_ObjectHideFlags: 0
