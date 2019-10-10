@@ -44,7 +44,7 @@ public class Particle2D : MonoBehaviour
 
     public float torque;
 
-    private float invMass;
+    public float invMass;
     private float inertia;
     public float invInertia;
 

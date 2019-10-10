@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PhysWorld : MonoBehaviour
 {
-    //public static int objectAmount = 3;
-    //public GameObject[] physObjects = new GameObject[objectAmount];
+    public static int objectAmount = 6;
+    public GameObject[] physObjects = new GameObject[objectAmount];
     public GameObject circle1;
     public GameObject circle2;
     public GameObject aabb1;
@@ -21,94 +21,91 @@ public class PhysWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckCollisionsDebug();
-        
-
-
+            
     }
 
-
-    void CheckCollisionsDebug()
+    private void FixedUpdate()
     {
-        /*if (CollisionHull2D.AABBAABB(aabb1.GetComponent<AxisAllignedBoundingBoxCollision2D>(), aabb2.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
+        for(int i = 0; i < objectAmount; ++i)
         {
-            Debug.Log("Collision AABB AABB");
+            GameObject colA = physObjects[i];
+            //colA.GetComponent<Renderer>().material.color = Color.green;
 
-        }*/
-
-        if (CollisionHull2D.CircleCircle(circle1.GetComponent<CircleCollision2D>(), circle2.GetComponent<CircleCollision2D>()))
-        {
-            Debug.Log("Collision Circ Circ");
-
-        }
-        if (CollisionHull2D.CircleAABB(circle1.GetComponent<CircleCollision2D>(), aabb1.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ1 AABB1");
-
-
-        }
-        if (CollisionHull2D.CircleAABB(circle2.GetComponent<CircleCollision2D>(), aabb1.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ2 AABB1");
-
-
-        }
-        if (CollisionHull2D.CircleAABB(circle2.GetComponent<CircleCollision2D>(), aabb2.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ2 AABB2");
-
-
-        }
-        if (CollisionHull2D.CircleAABB(circle1.GetComponent<CircleCollision2D>(), aabb2.GetComponent<AxisAllignedBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ1 AABB2");
-
-
-        }
-        if (CollisionHull2D.AABBOBB(aabb1.GetComponent<AxisAllignedBoundingBoxCollision2D>(), obb1.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision AABB1 OBB1");
-
-        }
-        if (CollisionHull2D.AABBOBB(aabb1.GetComponent<AxisAllignedBoundingBoxCollision2D>(), obb2.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision AABB1 OBB2");
-
-        }
-        if (CollisionHull2D.AABBOBB(aabb2.GetComponent<AxisAllignedBoundingBoxCollision2D>(), obb1.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision AABB2 OBB1");
-
-        }
-        if (CollisionHull2D.AABBOBB(aabb2.GetComponent<AxisAllignedBoundingBoxCollision2D>(), obb2.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision AABB2 OBB2");
-
-        }
-        if (CollisionHull2D.CircleOBB(circle2.GetComponent<CircleCollision2D>(), obb2.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ2 OBB2");
-        }
-        if (CollisionHull2D.CircleOBB(circle1.GetComponent<CircleCollision2D>(), obb1.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ1 OBB1");
-        }
-        if (CollisionHull2D.CircleOBB(circle1.GetComponent<CircleCollision2D>(), obb2.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ1 OBB2");
-        }
-        if (CollisionHull2D.CircleOBB(circle2.GetComponent<CircleCollision2D>(), obb1.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision Circ2 OBB1");
-        }
-        if (CollisionHull2D.OBBOBB(obb1.GetComponent<ObjectBoundingBoxCollision2D>(), obb2.GetComponent<ObjectBoundingBoxCollision2D>()))
-        {
-            Debug.Log("Collision OBB OBB");
-
+            for(int j = i+1; j < objectAmount; ++j)
+            {
+                GameObject colB = physObjects[j];
+                
+                
+            }
         }
     }
 
+ 
 
+   /* private void ProcessCollisions()
+    {
+        foreach( var colInfo in allCollisions)
+        {
+            ResolveVelocity(colInfo);
+            ResolveInterpenetration(colInfo);
+        }
+    }*/
+
+    void ResolveVelocity(CollisionHull2D.CollisionInfo colInfo)
+    {
+        float separatingVelocity = Vector2.Dot(colInfo.RelativeVelocity, colInfo.contacts[0].normal);
+
+        if(separatingVelocity > 0.0f)
+        {
+            return;
+        }
+        float newSepVelocity = -separatingVelocity * colInfo.contacts[0].restitution;
+        //Resting
+        Vector2 accCausedVelocity = colInfo.RigidBodyB.acceleration - colInfo.RigidBodyA.acceleration;
+        float accCausedSepVelocity = Vector2.Dot(accCausedVelocity,colInfo.contacts[0].normal) * Time.fixedDeltaTime;
+        if(accCausedSepVelocity < 0)
+        {
+            newSepVelocity += colInfo.contacts[0].restitution * accCausedSepVelocity;
+            if(newSepVelocity < 0)
+            {
+                newSepVelocity = 0.0f;
+            }
+        }
+
+        float deltaVelocity = newSepVelocity - separatingVelocity;
+        float totalInverseMass = colInfo.RigidBodyA.invMass + colInfo.RigidBodyB.invMass;
+        if(totalInverseMass <= 0.0f)
+        {
+            //no fx
+            return;
+        }
+        float impulse = deltaVelocity / totalInverseMass;
+        Vector2 impulsePerMass = colInfo.contacts[0].normal * impulse;
+
+        colInfo.RigidBodyA.velocity -= colInfo.RigidBodyA.invMass * impulsePerMass;
+        colInfo.RigidBodyB.velocity += colInfo.RigidBodyB.invMass * impulsePerMass;
+
+
+    }
+    
+    private void ResolveInterpenetration(CollisionHull2D.CollisionInfo colInfo)
+    {
+        if(colInfo.contacts[0].penetration <= 0.0f)
+        {
+            return;
+        }
+
+        float totalInverseMass = colInfo.RigidBodyA.invMass + colInfo.RigidBodyB.invMass;
+        if (totalInverseMass <= 0.0f)
+        {
+            return;
+        }
+        Vector2 movePerMass = colInfo.contacts[0].normal * (colInfo.contacts[0].penetration / totalInverseMass);
+
+        colInfo.RigidBodyA.position -= colInfo.RigidBodyA.invMass * movePerMass;
+        colInfo.RigidBodyB.position += colInfo.RigidBodyB.invMass * movePerMass;
+
+    }
 
     /*
      * create an array of all objects in the world, and create a nested loop that loops through each one with the other

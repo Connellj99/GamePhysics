@@ -64,7 +64,22 @@ public class CollisionHull2D : MonoBehaviour
 
 
         }
-       
+
+        public CollisionInfo(CircleCollision2D colA, ObjectBoundingBoxCollision2D colB, Vector2 normal, float penetration)
+        {
+            RigidBodyA = colA.GetComponent<Particle2D>();
+            RigidBodyB = colB.GetComponent<Particle2D>();
+
+
+            RelativeVelocity = RigidBodyB.velocity - RigidBodyA.velocity;
+
+            contacts[0].normal = normal;
+            contacts[0].penetration = penetration;
+            contacts[0].restitution = Mathf.Min(colA.restitution, colB.restitution);
+
+
+        }
+
 
         public Particle2D RigidBodyA { get; }
         public CollisionHull2D ShapeA { get; }
@@ -196,14 +211,14 @@ public class CollisionHull2D : MonoBehaviour
 
         if (distanceSquared < (circle.radius * circle.radius))
         {
-            return new CollisionInfo(circle, rect, distanceComplete.normalized, circle.radius - distance);
+            return new CollisionInfo(circle, rect, -distanceComplete.normalized, circle.radius - distance);
 
         }
         return null;
         //return distanceSquared < (circle.radius * circle.radius);
     }
 
-    static public bool CircleOBB(CircleCollision2D circle, ObjectBoundingBoxCollision2D rect)
+    static public CollisionInfo CircleOBB(CircleCollision2D circle, ObjectBoundingBoxCollision2D rect)
     {
         //transform circle into obb space transform.InverseTransformPoint(cirecle.postion);
         //then do circle AABB      
@@ -212,18 +227,21 @@ public class CollisionHull2D : MonoBehaviour
         Vector2 circleBox = new Vector2(Mathf.Max(-halfExtend.x, Mathf.Min(circleInOBB.x, halfExtend.x)),
             Mathf.Max(-halfExtend.y, Mathf.Min(circleInOBB.y, halfExtend.y)));
 
-        Vector2 distance = circleInOBB - circleBox;
-        float distanceSQ = Vector2.Dot(distance, distance);
+        Vector2 distanceVec = circleInOBB - circleBox;
+        float distanceSQ = Vector2.Dot(distanceVec, distanceVec);
 
         Debug.DrawLine(circleBox, circle.center);
 
 
         if (distanceSQ <= (circle.radius * circle.radius))
         {
-            return true;
+            //return true;
+            float distance = Mathf.Sqrt(distanceSQ);
+            return new CollisionInfo(circle, rect, rect.transform.TransformVector(-distanceVec).normalized, circle.radius - distance);
+
         }
 
-        return false;
+        return null;
          
     }
 
@@ -371,4 +389,6 @@ public class CollisionHull2D : MonoBehaviour
         colB.velocity += 1 / colB.mass * impulse;
 
     }
+
+   
 }
