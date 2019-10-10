@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectBoundingBoxCollision2D : MonoBehaviour
+public class ObjectBoundingBoxCollision2D : Particle2D
 {
     public GameObject attachedShape;
     public Vector2 center;

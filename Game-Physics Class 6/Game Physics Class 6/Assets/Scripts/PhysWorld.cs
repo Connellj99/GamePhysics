@@ -47,7 +47,7 @@ public class PhysWorld : MonoBehaviour
         foreach( var colInfo in allCollisions)
         {
             ResolveVelocity(colInfo);
-            ResolveInterpenetration(colInfo);
+            ResolvePenetration(colInfo);
         }
     }*/
 
@@ -88,7 +88,7 @@ public class PhysWorld : MonoBehaviour
 
     }
     
-    private void ResolveInterpenetration(CollisionHull2D.CollisionInfo colInfo)
+    private void ResolvePenetration(CollisionHull2D.CollisionInfo colInfo)
     {
         if(colInfo.contacts[0].penetration <= 0.0f)
         {

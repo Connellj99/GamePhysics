@@ -209,7 +209,7 @@ public class CollisionHull2D : MonoBehaviour
         float distance = Mathf.Sqrt(distanceSquared);
         Debug.DrawLine(closestPoint, circle.center);
 
-        if (distanceSquared < (circle.radius * circle.radius))
+        if (distanceSquared <= (circle.radius * circle.radius))
         {
             return new CollisionInfo(circle, rect, -distanceComplete.normalized, circle.radius - distance);
 
