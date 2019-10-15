@@ -95,7 +95,7 @@ public class CollisionHull2D : MonoBehaviour
             //closingVelocity = a.transform.position
         }
     }
-    
+
     public PhysDetect hullType;
 
     public enum PhysDetect
@@ -109,6 +109,7 @@ public class CollisionHull2D : MonoBehaviour
     {
         bool status;
     }*/
+    //abstract public CollisionInfo TestCollision(CollisionHull2D other);
 
     struct CollisionPairType
     {
@@ -333,6 +334,68 @@ public class CollisionHull2D : MonoBehaviour
             }
         }
         return false;
+
+        //List<Vector2> allAxis = new List<Vector2>();
+        //allAxis.AddRange(rectA.NormalAxis);
+        //allAxis.AddRange(rectB.NormalAxis);
+
+        //foreach (var axis in allAxis)
+        //{
+        //    float OBB1Min = float.MaxValue;
+        //    float OBB1Max = float.MinValue;
+
+        //    foreach (var vert in OBB1.Vertices)
+        //    {
+        //        float dotValue = (vert.x * axis.x + vert.y * axis.y);
+        //        if (dotValue < OBB1Min)
+        //        {
+        //            OBB1Min = dotValue;
+        //        }
+        //        if (dotValue > OBB1Max)
+        //        {
+        //            OBB1Max = dotValue;
+        //        }
+        //    }
+
+        //    float OBB2Min = float.MaxValue;
+        //    float OBB2Max = float.MinValue;
+        //    foreach (var vert in OBB2.Vertices)
+        //    {
+        //        float dotValue = (vert.x * axis.x + vert.y * axis.y);
+        //        if (dotValue < OBB2Min)
+        //        {
+        //            OBB2Min = dotValue;
+        //        }
+        //        if (dotValue > OBB2Max)
+        //        {
+        //            OBB2Max = dotValue;
+        //        }
+        //    }
+
+        //    if (!(OBB1Max < OBB2Min && OBB2Max < OBB1Min))
+        //    {
+        //        Vector2 AtoB = OBB2.center - OBB1.center;
+        //        float x_overlap = OBB1.halfExtends.x + OBB2.halfExtends.x - Mathf.Abs(AtoB.x);
+
+        //        if (x_overlap > 0.0f)
+        //        {
+        //            float y_overlap = OBB1.halfExtends.y + OBB2.halfExtends.y - Mathf.Abs(AtoB.y);
+        //            if (y_overlap > 0.0f)
+        //            {
+        //                if (x_overlap < y_overlap)
+        //                {
+        //                    return new CollisionInfo(OBB1, OBB2, AtoB.x < 0.0f ? -Vector2.right : Vector2.right, x_overlap);
+        //                }
+        //                else
+        //                {
+        //                    return new CollisionInfo(OBB1, OBB2, AtoB.y < 0.0f ? -Vector2.up : Vector2.up, y_overlap);
+        //                }
+        //            }
+        //        }
+        //    }
+    //}
+
+
     }
     static private bool OBBTest(Vector2 norm, ObjectBoundingBoxCollision2D proj, ObjectBoundingBoxCollision2D main)
     {

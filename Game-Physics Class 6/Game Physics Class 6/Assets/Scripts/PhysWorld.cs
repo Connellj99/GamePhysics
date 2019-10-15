@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PhysWorld : MonoBehaviour
 {
-    public static int objectAmount = 6;
-    public GameObject[] physObjects = new GameObject[objectAmount];
-    public GameObject circle1;
+    //public static int objectAmount = 6;
+    //public GameObject[] physObjects = new GameObject[objectAmount];
+    private List<CollisionHull2D.CollisionInfo> allCollisions = new List<CollisionHull2D.CollisionInfo>();
+    public List<GameObject> activeCollisions;
+    public static PhysWorld Instance = new PhysWorld();
+
+    /*public GameObject circle1;
     public GameObject circle2;
     public GameObject aabb1;
     public GameObject aabb2;
     public GameObject obb1;
-    public GameObject obb2;
+    public GameObject obb2;*/
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +30,7 @@ public class PhysWorld : MonoBehaviour
 
     private void FixedUpdate()
     {
-        for(int i = 0; i < objectAmount; ++i)
+        /*for(int i = 0; i < objectAmount; ++i)
         {
             GameObject colA = physObjects[i];
             //colA.GetComponent<Renderer>().material.color = Color.green;
@@ -37,19 +41,102 @@ public class PhysWorld : MonoBehaviour
                 
                 
             }
+        }*/
+       
+        foreach (var col in activeCollisions)
+        {
+            //col.GetComponent<Renderer>().material.color = Color.blue;
         }
+
+        foreach (var col in activeCollisions)
+        {
+            foreach (var col2 in activeCollisions)
+            {
+                if (col != col2)
+                {
+                    //var collisionInfo = col.GetComponent<CollisionHull2D>().TestCollision(col2.GetComponent<CollisionHull2D>());
+                    CollisionHull2D.PhysDetect newHullDetect = col.GetComponent<CollisionHull2D>().hullType;
+                    CollisionHull2D.PhysDetect newHullDetect2 = col2.GetComponent<CollisionHull2D>().hullType;
+                    CollisionHull2D.CollisionInfo collisionInfo = null;
+                    if (newHullDetect == CollisionHull2D.PhysDetect.Circle)
+                    {
+                        if (newHullDetect2 == CollisionHull2D.PhysDetect.Circle)
+                        {
+                            
+                            collisionInfo = CollisionHull2D.CircleCircle(col.GetComponent<CircleCollision2D>(), col2.GetComponent<CircleCollision2D>());
+                            //Debug.Log("Circles");
+                            Debug.Log(collisionInfo);
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.AABB)
+                        {
+                            collisionInfo = CollisionHull2D.CircleAABB(col.GetComponent<CircleCollision2D>(), col2.GetComponent<AxisAllignedBoundingBoxCollision2D>());
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.OBB)
+                        {
+                            collisionInfo = CollisionHull2D.CircleOBB(col.GetComponent<CircleCollision2D>(), col2.GetComponent<ObjectBoundingBoxCollision2D>());
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (newHullDetect == CollisionHull2D.PhysDetect.AABB)
+                    {
+                        if (newHullDetect2 == CollisionHull2D.PhysDetect.Circle)
+                        {
+                            collisionInfo = CollisionHull2D.CircleAABB(col2.GetComponent<CircleCollision2D>(), col.GetComponent<AxisAllignedBoundingBoxCollision2D>());
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.AABB)
+                        {
+                            collisionInfo = CollisionHull2D.AABBAABB(col.GetComponent<AxisAllignedBoundingBoxCollision2D>(), col2.GetComponent<AxisAllignedBoundingBoxCollision2D>());
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.OBB)
+                        {
+                            //collisionInfo = CollisionHull2D.AABBOBB(col.GetComponent<AxisAllignedBoundingBoxCollision2D>(), col2.GetComponent<ObjectBoundingBoxCollision2D>());
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (newHullDetect == CollisionHull2D.PhysDetect.OBB)
+                    {
+                        if (newHullDetect2 == CollisionHull2D.PhysDetect.Circle)
+                        {
+                            collisionInfo = CollisionHull2D.CircleOBB(col2.GetComponent<CircleCollision2D>(), col.GetComponent<ObjectBoundingBoxCollision2D>());
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.AABB)
+                        {
+                            //collisionInfo = CollisionHull2D.AABBOBB(col2.GetComponent<AxisAllignedBoundingBoxCollision2D>(), col.GetComponent<ObjectBoundingBoxCollision2D>());
+                        }
+                        else if (newHullDetect2 == CollisionHull2D.PhysDetect.OBB)
+                        {
+                            //collisionInfo = CollisionHull2D.OBBOBB(col.GetComponent<ObjectBoundingBoxCollision2D>(), col2.GetComponent<ObjectBoundingBoxCollision2D>());
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (collisionInfo != null)
+                    {
+                        allCollisions.Add(collisionInfo);
+                        //col.GetComponent<Renderer>().material.color = Color.red;
+                    }
+                }
+            }
+        }
+        DoCollisions();
     }
 
  
 
-   /* private void ProcessCollisions()
+    private void DoCollisions()
     {
         foreach( var colInfo in allCollisions)
         {
             ResolveVelocity(colInfo);
             ResolvePenetration(colInfo);
         }
-    }*/
+        allCollisions.Clear();
+    }
 
     void ResolveVelocity(CollisionHull2D.CollisionInfo colInfo)
     {

@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &102284328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +163,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
   leftTop: {x: 0, y: 0}
@@ -232,12 +247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd58442ecae5fab40879d7486c4f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle1: {fileID: 1638113780}
-  circle2: {fileID: 1929336198}
-  aabb1: {fileID: 1194746477}
-  aabb2: {fileID: 102284327}
-  obb1: {fileID: 814966635}
-  obb2: {fileID: 652782468}
+  activeCollisions:
+  - {fileID: 1638113780}
+  - {fileID: 1929336198}
+  - {fileID: 1194746477}
+  - {fileID: 102284327}
 --- !u!1 &652782468
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +295,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50270482dd8e3fc409b8c567a5f3b625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   attachedShape: {fileID: 652782468}
   center: {x: 0, y: 0}
   botLeft: {x: 0, y: 0}
@@ -442,6 +471,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50270482dd8e3fc409b8c567a5f3b625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   attachedShape: {fileID: 814966635}
   center: {x: 0, y: 0}
   botLeft: {x: 0, y: 0}
@@ -567,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1194746478
 Transform:
   m_ObjectHideFlags: 0
@@ -594,6 +638,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
   leftTop: {x: 0, y: 0}
@@ -664,6 +723,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   attachedShape: {fileID: 1638113780}
   radius: 2
   center: {x: 0, y: 0}
@@ -697,6 +771,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 1}
   acceleration: {x: 0, y: 1}
   startTime: 0
+  restitution: 0
   angularAcceleration: 1
   phystype: 0
   circtype: 1
@@ -704,6 +779,7 @@ MonoBehaviour:
   shapetype: 0
   mass: 1.01671657e+37
   torque: 0
+  invMass: 0
   invInertia: 0
 --- !u!1 &1929336198
 GameObject:
@@ -749,6 +825,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: {fileID: 0}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 0
+  forcetype: 0
+  shapetype: 0
+  mass: 0
+  torque: 0
+  invMass: 0
+  invInertia: 0
   attachedShape: {fileID: 1929336198}
   radius: 2
   center: {x: 0, y: 0}
@@ -783,6 +874,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   startTime: 0
+  restitution: 0
   angularAcceleration: 0
   phystype: 0
   circtype: 0
@@ -790,4 +882,5 @@ MonoBehaviour:
   shapetype: 0
   mass: 0
   torque: 0
+  invMass: 0
   invInertia: 0
