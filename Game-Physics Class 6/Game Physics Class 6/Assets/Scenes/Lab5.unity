@@ -120,6 +120,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &47176424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47176427}
+  - component: {fileID: 47176426}
+  - component: {fileID: 47176425}
+  m_Layer: 0
+  m_Name: CollisionCircle3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &47176425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47176424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape: {fileID: 47176424}
+  position: {x: 13.12, y: 17.97}
+  velocity: {x: -5, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 0
+  mass: 2.2014568e+37
+  torque: 0
+  invMass: 0
+  invInertia: 0
+--- !u!114 &47176426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47176424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 0
+  attachedShape: {fileID: 47176424}
+  radius: 2
+  center: {x: 0, y: 0}
+--- !u!4 &47176427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47176424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.12, y: 17.97, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &102284327
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,10 +222,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 102284327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hullType: 1
+  shape: {fileID: 102284327}
+  position: {x: 0, y: 12}
+  velocity: {x: 0, y: 1}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 5.0319013e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
 --- !u!114 &102284329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,29 +252,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 1
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
   leftTop: {x: 0, y: 0}
   rightBot: {x: 0, y: 0}
   rect: {fileID: 102284327}
   center: {x: 0, y: 0}
+  zRot: 0
   rectTopBot: 2
   rectLeftRight: 2
+  halfExtends: {x: 0, y: 0}
   left: {x: 0, y: 0}
   right: {x: 0, y: 0}
   top: {x: 0, y: 0}
@@ -198,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102284327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -247,11 +324,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd58442ecae5fab40879d7486c4f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physManager: {fileID: 418346222}
   activeCollisions:
   - {fileID: 1638113780}
   - {fileID: 1929336198}
   - {fileID: 1194746477}
   - {fileID: 102284327}
+  - {fileID: 47176424}
+  - {fileID: 701147564}
+  - {fileID: 814966635}
+  - {fileID: 652782468}
+  - {fileID: 661610703}
+  - {fileID: 1312003604}
 --- !u!1 &652782468
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &652782469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,10 +363,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 652782468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hullType: 2
+  shape: {fileID: 652782468}
+  position: {x: -18.88, y: 9.08}
+  velocity: {x: 0, y: -1}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 5.0319013e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
 --- !u!114 &652782470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,21 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50270482dd8e3fc409b8c567a5f3b625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 2
   attachedShape: {fileID: 652782468}
   center: {x: 0, y: 0}
   botLeft: {x: 0, y: 0}
@@ -318,7 +402,8 @@ MonoBehaviour:
   topLeft: {x: 0, y: 0}
   xNormal: {x: 0, y: 0}
   yNormal: {x: 0, y: 0}
-  halfLength: {x: 0, y: 0}
+  halfLength: {x: 2, y: 2}
+  halfExtends: {x: 0, y: 0}
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
   zRot: 0
@@ -330,11 +415,183 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652782468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 3, z: 0}
+  m_LocalPosition: {x: -18.88, y: 9.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &661610703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 661610706}
+  - component: {fileID: 661610705}
+  - component: {fileID: 661610704}
+  m_Layer: 0
+  m_Name: CollisionSquareAABB4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &661610704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661610703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape: {fileID: 661610703}
+  position: {x: -18.4, y: -3.6}
+  velocity: {x: 0, y: -0.5}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 1
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 5.0319013e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
+--- !u!114 &661610705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661610703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 1
+  posMin: {x: 0, y: 0}
+  posMax: {x: 0, y: 0}
+  leftTop: {x: 0, y: 0}
+  rightBot: {x: 0, y: 0}
+  rect: {fileID: 661610703}
+  center: {x: 0, y: 0}
+  zRot: 0
+  rectTopBot: 2
+  rectLeftRight: 2
+  halfExtends: {x: 0, y: 0}
+  left: {x: 0, y: 0}
+  right: {x: 0, y: 0}
+  top: {x: 0, y: 0}
+  bot: {x: 0, y: 0}
+--- !u!4 &661610706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661610703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.4, y: -3.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &701147564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701147567}
+  - component: {fileID: 701147566}
+  - component: {fileID: 701147565}
+  m_Layer: 0
+  m_Name: CollisionSquareAABB3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &701147565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701147564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape: {fileID: 701147564}
+  position: {x: -11.57, y: 17.16}
+  velocity: {x: 0, y: 1}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 0
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 5.0319013e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
+--- !u!114 &701147566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701147564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 1
+  posMin: {x: 0, y: 0}
+  posMax: {x: 0, y: 0}
+  leftTop: {x: 0, y: 0}
+  rightBot: {x: 0, y: 0}
+  rect: {fileID: 701147564}
+  center: {x: 0, y: 0}
+  zRot: 0
+  rectTopBot: 2
+  rectLeftRight: 2
+  halfExtends: {x: 0, y: 0}
+  left: {x: 0, y: 0}
+  right: {x: 0, y: 0}
+  top: {x: 0, y: 0}
+  bot: {x: 0, y: 0}
+--- !u!4 &701147567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701147564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.57, y: 17.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761347085
 GameObject:
@@ -444,7 +701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &814966636
 Transform:
   m_ObjectHideFlags: 0
@@ -453,7 +710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814966635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -20.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -471,21 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50270482dd8e3fc409b8c567a5f3b625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 2
   attachedShape: {fileID: 814966635}
   center: {x: 0, y: 0}
   botLeft: {x: 0, y: 0}
@@ -494,10 +737,11 @@ MonoBehaviour:
   topLeft: {x: 0, y: 0}
   xNormal: {x: 0, y: 0}
   yNormal: {x: 0, y: 0}
-  halfLength: {x: 0, y: 0}
+  halfLength: {x: 2, y: 2}
+  halfExtends: {x: 0, y: 0}
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
-  zRot: 0
+  zRot: 20
 --- !u!114 &814966638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,10 +751,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 814966635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hullType: 2
+  shape: {fileID: 814966635}
+  position: {x: -20.4, y: 0}
+  velocity: {x: 0, y: 1}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 1
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 6.918864e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
 --- !u!1 &1148656641
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148656641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -122.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -638,29 +896,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411b105f2cecd3c4ba4a0b0b18299a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 1
   posMin: {x: 0, y: 0}
   posMax: {x: 0, y: 0}
   leftTop: {x: 0, y: 0}
   rightBot: {x: 0, y: 0}
   rect: {fileID: 1194746477}
   center: {x: 0, y: 0}
+  zRot: 0
   rectTopBot: 2
   rectLeftRight: 2
+  halfExtends: {x: 0, y: 0}
   left: {x: 0, y: 0}
   right: {x: 0, y: 0}
   top: {x: 0, y: 0}
@@ -674,10 +920,99 @@ MonoBehaviour:
   m_GameObject: {fileID: 1194746477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hullType: 1
+  shape: {fileID: 1194746477}
+  position: {x: 0, y: 0}
+  velocity: {x: 0, y: -2}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 1
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 1
+  mass: 5.0319013e+36
+  torque: 0
+  invMass: 0
+  invInertia: 0
+--- !u!1 &1312003604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312003607}
+  - component: {fileID: 1312003606}
+  - component: {fileID: 1312003605}
+  m_Layer: 0
+  m_Name: CollisionCircle4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1312003605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312003604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a6d657b0e36b74c96b9670d0dc1696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape: {fileID: 1312003604}
+  position: {x: -33.3, y: 3.4}
+  velocity: {x: 3, y: 0}
+  acceleration: {x: 0, y: 0}
+  startTime: 0
+  restitution: 1
+  angularAcceleration: 0
+  phystype: 0
+  circtype: 1
+  forcetype: 8
+  shapetype: 0
+  mass: 2.2014568e+37
+  torque: 0
+  invMass: 0
+  invInertia: 0
+--- !u!114 &1312003606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312003604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 0
+  attachedShape: {fileID: 1312003604}
+  radius: 4
+  center: {x: 0, y: 0}
+--- !u!4 &1312003607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312003604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.3, y: 3.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1638113780
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +1023,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1638113781}
   - component: {fileID: 1638113782}
-  - component: {fileID: 1638113783}
   - component: {fileID: 1638113784}
   m_Layer: 0
   m_Name: CollisionCircle
@@ -723,37 +1057,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 0
   attachedShape: {fileID: 1638113780}
   radius: 2
   center: {x: 0, y: 0}
---- !u!114 &1638113783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638113780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hullType: 0
 --- !u!114 &1638113784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +1078,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 1}
   acceleration: {x: 0, y: 1}
   startTime: 0
-  restitution: 0
+  restitution: 1
   angularAcceleration: 1
   phystype: 0
   circtype: 1
@@ -791,7 +1098,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1929336201}
   - component: {fileID: 1929336200}
-  - component: {fileID: 1929336199}
   - component: {fileID: 1929336202}
   m_Layer: 0
   m_Name: CollisionCircle2
@@ -800,19 +1106,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1929336199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929336198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ee3785fa25f9429a731f16554f431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hullType: 0
 --- !u!114 &1929336200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,21 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe6a17027565849abc7d51c986851e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 0}
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
-  startTime: 0
-  restitution: 0
-  angularAcceleration: 0
-  phystype: 0
-  circtype: 0
-  forcetype: 0
-  shapetype: 0
-  mass: 0
-  torque: 0
-  invMass: 0
-  invInertia: 0
+  hullType: 0
   attachedShape: {fileID: 1929336198}
   radius: 2
   center: {x: 0, y: 0}
@@ -874,13 +1153,13 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   startTime: 0
-  restitution: 0
+  restitution: 1
   angularAcceleration: 0
   phystype: 0
-  circtype: 0
-  forcetype: 0
+  circtype: 1
+  forcetype: 8
   shapetype: 0
-  mass: 0
+  mass: 2.2014568e+37
   torque: 0
   invMass: 0
   invInertia: 0
