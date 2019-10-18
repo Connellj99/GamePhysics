@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9089350954605237291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9089350954605237290}
+  - component: {fileID: 9089350954605237301}
+  - component: {fileID: 9089350954605237300}
+  - component: {fileID: 418346223}
+  m_Layer: 0
+  m_Name: ColManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9089350954605237290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089350954605237291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.817906, y: -1.426306, z: -2.240758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9089350954605237301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089350954605237291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd58442ecae5fab40879d7486c4f6879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physManager: {fileID: 9089350954605237291}
+  activeCollisions: []
+--- !u!114 &9089350954605237300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089350954605237291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb58ca8850de8f42bc7f46b95ff41b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colManager: {fileID: 9089350954605237291}
+  lazerPrefab: {fileID: 6436486917780434399, guid: bf1ce05a5f1e79042bd2845e0b03f40f,
+    type: 3}
+  lazerSpawn: {fileID: 0}
+  particle2d: {fileID: 6436486917780434384, guid: bf1ce05a5f1e79042bd2845e0b03f40f,
+    type: 3}
+--- !u!114 &418346223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089350954605237291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa83ed3a2000f714c9581587daacecd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 4
+  score: 0
