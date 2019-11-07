@@ -179,7 +179,7 @@ public class Particle3D : MonoBehaviour
         //torque applied is calculated using 2D equivalent of T = pf x F: T is torque, pf is moment arm (point of applied force relative to center of mass)F is applied force at pf.  
         //It is important to note that the center of mass may not be the center of the object, so it might help to add a separate member for center of mass in local and world space.
         //torque = pf * f
-        //torque = Vector3.Cross(localSpace, otherSpace).z;
+        torque = Vector3.Cross(localSpace, otherSpace);
     }
 
     // Start is called before the first frame update
@@ -196,7 +196,8 @@ public class Particle3D : MonoBehaviour
         position = transform.position;
 
         
-        localInertiaTensor = shape.GetComponent<InterialTensor>().findInertia();
+        //localInertiaTensor = shape.GetComponent<InterialTensor>().findInertia();
+        localInertiaTensor = findInertia();
         Mass = mass;
         localCenterOfMass = shape.transform.position;
         startTime = Time.time;
@@ -206,8 +207,7 @@ public class Particle3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        
+        applyTorque();
 
 
     }
@@ -249,7 +249,7 @@ public class Particle3D : MonoBehaviour
         worldTransformationMatrix = Matrix4x4.TRS(position, rotation, new Vector3(1, 1, 1));
         //world to object transform = worldTransformationMatrix.transpose
         invworldTransformationMatrix = worldTransformationMatrix.transpose;
-
+        invlocalInertiaTensor = localInertiaTensor.transpose;
         worldInertiaTensor = worldTransformationMatrix * localInertiaTensor * invworldTransformationMatrix;
 
         updateAngularAcceleration();
@@ -260,5 +260,70 @@ public class Particle3D : MonoBehaviour
         //set positiion and rotation
     }
 
- 
+
+    public float radius = 0;
+    public float width = 0;
+    public float height = 0;
+    public float depth = 0;
+
+    public Matrix4x4 findInertia()
+    {
+        Matrix4x4 inertia = new Matrix4x4();
+        //Particle3D.particleShape newPartShape = shape.GetComponent<Particle3D>().shapetype;
+        particleShape newPartShape = shapetype;
+        if (newPartShape == Particle3D.particleShape.SolidSphere)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(0.4f * mass * (radius * radius), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, 0.4f * mass * (radius * radius), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 0.4f * mass * (radius * radius), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+
+        }
+
+        if (newPartShape == Particle3D.particleShape.HollowSphere)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(0.66f * mass * (radius * radius), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, 0.66f * mass * (radius * radius), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 0.66f * mass * (radius * radius), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+
+        }
+
+        if (newPartShape == Particle3D.particleShape.SolidBox)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(0.083f * mass * ((height * height) + (depth * depth)), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, 0.083f * mass * ((depth * depth) + (width * width)), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 0.083f * mass * ((height * height) + (width * width)), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+        }
+        if (newPartShape == Particle3D.particleShape.HollowBox)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(1.66f * mass * ((height * height) + (depth * depth)), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, 1.66f * mass * ((depth * depth) + (width * width)), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 1.66f * mass * ((height * height) + (width * width)), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+        }
+        if (newPartShape == Particle3D.particleShape.SolidCylinder)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(0.083f * mass * (3 * (radius * radius) + (height * height)), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, 0.083f * mass * (3 * (radius * radius) + (height * height)), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 0.5f * mass * (radius * radius), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+        }
+        if (newPartShape == Particle3D.particleShape.SolidCone)
+        {
+            //float mass = shape.GetComponent<Particle3D>().mass;
+            inertia.SetColumn(0, new Vector4(((0.6f * mass * (height * height)) + (0.15f * mass * (radius * radius))), 0, 0, 0));
+            inertia.SetColumn(1, new Vector4(0, ((0.6f * mass * (height * height)) + (0.15f * mass * (radius * radius))), 0, 0));
+            inertia.SetColumn(2, new Vector4(0, 0, 0.3f * mass * (radius * radius), 0));
+            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
+        }
+
+        return inertia.inverse;
+    }
 }
