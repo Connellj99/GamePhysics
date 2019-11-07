@@ -179,7 +179,7 @@ public class Particle3D : MonoBehaviour
         //torque applied is calculated using 2D equivalent of T = pf x F: T is torque, pf is moment arm (point of applied force relative to center of mass)F is applied force at pf.  
         //It is important to note that the center of mass may not be the center of the object, so it might help to add a separate member for center of mass in local and world space.
         //torque = pf * f
-        //torque = Vector3.Cross(localSpace, otherSpace).z;
+        torque = Vector3.Cross(localSpace, otherSpace);
     }
 
     // Start is called before the first frame update
@@ -197,6 +197,7 @@ public class Particle3D : MonoBehaviour
 
         
         localInertiaTensor = shape.GetComponent<InterialTensor>().findInertia();
+        //localInertiaTensor = findInertia();
         Mass = mass;
         localCenterOfMass = shape.transform.position;
         startTime = Time.time;
@@ -206,8 +207,7 @@ public class Particle3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        
+        applyTorque();
 
 
     }
@@ -249,7 +249,7 @@ public class Particle3D : MonoBehaviour
         worldTransformationMatrix = Matrix4x4.TRS(position, rotation, new Vector3(1, 1, 1));
         //world to object transform = worldTransformationMatrix.transpose
         invworldTransformationMatrix = worldTransformationMatrix.transpose;
-
+        invlocalInertiaTensor = localInertiaTensor.transpose;
         worldInertiaTensor = worldTransformationMatrix * localInertiaTensor * invworldTransformationMatrix;
 
         updateAngularAcceleration();
@@ -260,5 +260,7 @@ public class Particle3D : MonoBehaviour
         //set positiion and rotation
     }
 
- 
+
+
+    
 }
