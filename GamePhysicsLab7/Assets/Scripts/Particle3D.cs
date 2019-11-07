@@ -196,8 +196,8 @@ public class Particle3D : MonoBehaviour
         position = transform.position;
 
         
-        //localInertiaTensor = shape.GetComponent<InterialTensor>().findInertia();
-        localInertiaTensor = findInertia();
+        localInertiaTensor = shape.GetComponent<InterialTensor>().findInertia();
+        //localInertiaTensor = findInertia();
         Mass = mass;
         localCenterOfMass = shape.transform.position;
         startTime = Time.time;
@@ -261,69 +261,6 @@ public class Particle3D : MonoBehaviour
     }
 
 
-    public float radius = 0;
-    public float width = 0;
-    public float height = 0;
-    public float depth = 0;
 
-    public Matrix4x4 findInertia()
-    {
-        Matrix4x4 inertia = new Matrix4x4();
-        //Particle3D.particleShape newPartShape = shape.GetComponent<Particle3D>().shapetype;
-        particleShape newPartShape = shapetype;
-        if (newPartShape == Particle3D.particleShape.SolidSphere)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(0.4f * mass * (radius * radius), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, 0.4f * mass * (radius * radius), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 0.4f * mass * (radius * radius), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-
-        }
-
-        if (newPartShape == Particle3D.particleShape.HollowSphere)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(0.66f * mass * (radius * radius), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, 0.66f * mass * (radius * radius), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 0.66f * mass * (radius * radius), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-
-        }
-
-        if (newPartShape == Particle3D.particleShape.SolidBox)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(0.083f * mass * ((height * height) + (depth * depth)), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, 0.083f * mass * ((depth * depth) + (width * width)), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 0.083f * mass * ((height * height) + (width * width)), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-        }
-        if (newPartShape == Particle3D.particleShape.HollowBox)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(1.66f * mass * ((height * height) + (depth * depth)), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, 1.66f * mass * ((depth * depth) + (width * width)), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 1.66f * mass * ((height * height) + (width * width)), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-        }
-        if (newPartShape == Particle3D.particleShape.SolidCylinder)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(0.083f * mass * (3 * (radius * radius) + (height * height)), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, 0.083f * mass * (3 * (radius * radius) + (height * height)), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 0.5f * mass * (radius * radius), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-        }
-        if (newPartShape == Particle3D.particleShape.SolidCone)
-        {
-            //float mass = shape.GetComponent<Particle3D>().mass;
-            inertia.SetColumn(0, new Vector4(((0.6f * mass * (height * height)) + (0.15f * mass * (radius * radius))), 0, 0, 0));
-            inertia.SetColumn(1, new Vector4(0, ((0.6f * mass * (height * height)) + (0.15f * mass * (radius * radius))), 0, 0));
-            inertia.SetColumn(2, new Vector4(0, 0, 0.3f * mass * (radius * radius), 0));
-            inertia.SetColumn(3, new Vector4(0, 0, 0, 1));
-        }
-
-        return inertia.inverse;
-    }
+    
 }
