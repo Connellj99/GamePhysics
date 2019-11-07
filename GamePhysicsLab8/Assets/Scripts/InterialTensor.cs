@@ -5,41 +5,7 @@ using UnityEngine;
 public class InterialTensor : MonoBehaviour
 {
     public GameObject shape;
-    /*
-     *  Solid sphere
-        Hollow sphere
-        Solid box & cube
-        Hollow box & cube
-        Solid cylinder
-        Solid cone
-     */
-
-
-    /*      2D code
-     *    private void findInertia()
-{
-    if(shapetype == particleShape.Sphere)
-    {
-        float radius = shape.transform.localScale.x;
-        inertia = 0.5f * mass * (radius * radius);
-    }
-
-    if (shapetype == particleShape.Cube)
-    {
-        float dxy = shape.transform.localScale.x;
-        inertia = 0.083f * mass * (dxy * dxy);
-
-    }
-
-    if (shapetype == particleShape.Rectangle)
-    {
-        float dx = shape.transform.localScale.x;
-        float dy = shape.transform.localScale.y;
-        inertia = 0.083f * mass * (dx * dy);
-    }
-    invInertia = 1.0f/inertia;
-}
-     */
+   
     public float radius = 0;
     public float width = 0;
     public float height = 0;

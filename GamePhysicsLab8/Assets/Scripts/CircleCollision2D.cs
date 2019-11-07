@@ -2,16 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleCollision2D : MonoBehaviour
+public class CircleCollision2D : CollisionHull2D
 {
     public GameObject attachedShape;
     public float radius;
+    //public float restitution;
     public Vector2 center = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("ColManager").GetComponent<PhysWorld>().AddObject(attachedShape);
         center = attachedShape.transform.position;
+    }
+
+    public override CollisionInfo CollisionTests(CollisionHull2D other)
+    {
+        switch (other.hullType)
+        {
+            case CollisionHull2D.PhysDetect.Circle:
+                return CollisionHull2D.CircleCircle(this, other as CircleCollision2D);
+            case CollisionHull2D.PhysDetect.AABB:
+                return CollisionHull2D.CircleAABB(this, other as AxisAllignedBoundingBoxCollision2D);
+            case CollisionHull2D.PhysDetect.OBB:
+                return CollisionHull2D.CircleOBB(this, other as ObjectBoundingBoxCollision2D);
+
+            default:
+                break;
+        }
+
+        return null;
     }
 
     public void OnDrawGizmos()
