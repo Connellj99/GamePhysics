@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleCollision2D : CollisionHull2D
+public class CircleCollision3D : CollisionHull3D
 {
     public GameObject attachedShape;
     public float radius;
     //public float restitution;
-    public Vector2 center = new Vector2(0,0);
+    public Vector3 center = new Vector3(0,0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -16,16 +16,16 @@ public class CircleCollision2D : CollisionHull2D
         center = attachedShape.transform.position;
     }
 
-    public override CollisionInfo CollisionTests(CollisionHull2D other)
+    public override CollisionInfo CollisionTests(CollisionHull3D other)
     {
         switch (other.hullType)
         {
-            case CollisionHull2D.PhysDetect.Circle:
-                return CollisionHull2D.CircleCircle(this, other as CircleCollision2D);
-            case CollisionHull2D.PhysDetect.AABB:
-                return CollisionHull2D.CircleAABB(this, other as AxisAllignedBoundingBoxCollision2D);
-            case CollisionHull2D.PhysDetect.OBB:
-                return CollisionHull2D.CircleOBB(this, other as ObjectBoundingBoxCollision2D);
+            case CollisionHull3D.PhysDetect.Circle:
+                return CollisionHull3D.CircleCircle(this, other as CircleCollision3D);
+            case CollisionHull3D.PhysDetect.AABB:
+                return CollisionHull3D.CircleAABB(this, other as AxisAllignedBoundingBoxCollision3D);
+            case CollisionHull3D.PhysDetect.OBB:
+                return CollisionHull3D.CircleOBB(this, other as ObjectBoundingBoxCollision3D);
 
             default:
                 break;

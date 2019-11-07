@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhysWorld : MonoBehaviour
 {
     public GameObject physManager;
-    private List<CollisionHull2D.CollisionInfo> allCollisions = new List<CollisionHull2D.CollisionInfo>();
+    private List<CollisionHull3D.CollisionInfo> allCollisions = new List<CollisionHull3D.CollisionInfo>();
 
     public List<GameObject> activeCollisions;
 
@@ -32,7 +32,7 @@ public class PhysWorld : MonoBehaviour
                 {
                     activeCollisions.RemoveAll(GameObject => GameObject == null);
                     
-                    var collisionInfo = col.GetComponent<CollisionHull2D>().CollisionTests(col2.GetComponent<CollisionHull2D>());
+                    var collisionInfo = col.GetComponent<CollisionHull3D>().CollisionTests(col2.GetComponent<CollisionHull3D>());
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {
@@ -67,9 +67,9 @@ public class PhysWorld : MonoBehaviour
     }
 
     //how the objects forces act upon each other
-    void ResolveVelocity(CollisionHull2D.CollisionInfo colInfo)
+    void ResolveVelocity(CollisionHull3D.CollisionInfo colInfo)
     {
-        float separatingVelocity = Vector2.Dot(colInfo.RelativeVelocity, colInfo.contacts[0].normal);
+        float separatingVelocity = Vector3.Dot(colInfo.RelativeVelocity, colInfo.contacts[0].normal);
 
         if(separatingVelocity > 0.0f)
         {
@@ -77,8 +77,8 @@ public class PhysWorld : MonoBehaviour
         }
         float newSepVelocity = -separatingVelocity * colInfo.contacts[0].restitution;
         //Resting
-        Vector2 accCausedVelocity = colInfo.RigidBodyB.acceleration - colInfo.RigidBodyA.acceleration;
-        float accCausedSepVelocity = Vector2.Dot(accCausedVelocity,colInfo.contacts[0].normal) * Time.fixedDeltaTime;
+        Vector3 accCausedVelocity = colInfo.RigidBodyB.acceleration - colInfo.RigidBodyA.acceleration;
+        float accCausedSepVelocity = Vector3.Dot(accCausedVelocity,colInfo.contacts[0].normal) * Time.fixedDeltaTime;
         if(accCausedSepVelocity < 0)
         {
             newSepVelocity += colInfo.contacts[0].restitution * accCausedSepVelocity;
@@ -96,7 +96,7 @@ public class PhysWorld : MonoBehaviour
             return;
         }
         float impulse = deltaVelocity / totalInverseMass;
-        Vector2 impulsePerMass = colInfo.contacts[0].normal * impulse;
+        Vector3 impulsePerMass = colInfo.contacts[0].normal * impulse;
 
         colInfo.RigidBodyA.velocity -= colInfo.RigidBodyA.invMass * impulsePerMass;
         colInfo.RigidBodyB.velocity += colInfo.RigidBodyB.invMass * impulsePerMass;
@@ -105,7 +105,7 @@ public class PhysWorld : MonoBehaviour
     }
     
     //how deep the objects intersect
-    private void ResolvePenetration(CollisionHull2D.CollisionInfo colInfo)
+    private void ResolvePenetration(CollisionHull3D.CollisionInfo colInfo)
     {
         if(colInfo.contacts[0].penetration <= 0.0f)
         {
@@ -117,7 +117,7 @@ public class PhysWorld : MonoBehaviour
         {
             return;
         }
-        Vector2 movePerMass = colInfo.contacts[0].normal * (colInfo.contacts[0].penetration / totalInverseMass);
+        Vector3 movePerMass = colInfo.contacts[0].normal * (colInfo.contacts[0].penetration / totalInverseMass);
 
         colInfo.RigidBodyA.position -= colInfo.RigidBodyA.invMass * movePerMass;
         colInfo.RigidBodyB.position += colInfo.RigidBodyB.invMass * movePerMass;
