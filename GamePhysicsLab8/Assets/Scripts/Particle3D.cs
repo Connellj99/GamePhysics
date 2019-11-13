@@ -59,6 +59,10 @@ public class Particle3D : MonoBehaviour
             return mass;
         }
     }
+    public float GetInverseMass()
+    {
+        return invMass;
+    }
 
 
 
@@ -181,6 +185,18 @@ public class Particle3D : MonoBehaviour
         //torque = pf * f
         torque = Vector3.Cross(localSpace, otherSpace);
     }
+
+    public Matrix4x4 GetObjectToWorld()
+    {
+        return transform.localToWorldMatrix;
+    }
+    public Matrix4x4 GetWorldToObject()
+    {
+        return transform.worldToLocalMatrix;
+    }
+
+
+   
 
     // Start is called before the first frame update
     void Start()

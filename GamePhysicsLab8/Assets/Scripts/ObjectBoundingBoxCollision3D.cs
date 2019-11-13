@@ -8,8 +8,8 @@ public class ObjectBoundingBoxCollision3D : CollisionHull3D
     public Vector3 center;
     public Vector3 botLeft;
     public Vector3 topRight;
-    public Vector3 botRight;
-    public Vector3 topLeft;
+    //public Vector3 botRight;
+    //public Vector3 topLeft;
     public Vector3 xNormal;
     public Vector3 yNormal;
     public Vector3 halfLength;
@@ -35,14 +35,19 @@ public class ObjectBoundingBoxCollision3D : CollisionHull3D
 
 
         center = attachedShape.transform.position;
-        botLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
-        botRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
-        topRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, halfLength.y) + new Vector3(center.x, center.y);
-        topLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, halfLength.y) + new Vector3(center.x, center.y);
+        //botLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
+        //botRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, -halfLength.y) + new Vector3(center.x, center.y);
+        //topRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, halfLength.y) + new Vector3(center.x, center.y);
+        //topLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, halfLength.y) + new Vector3(center.x, center.y);
         xNormal = Quaternion.Euler(0, 0, zRot) * new Vector3(1, 0, 0).normalized;
         yNormal = Quaternion.Euler(0, 0, zRot) * new Vector3(0, 1, 0).normalized;
 
-        posMin = botLeft;
+        //posMax = new Vector3(center.x + halfExtends.x, center.y + halfExtends.y, center.z + halfExtends.z);
+        //posMin = new Vector3(center.x - halfExtends.x, center.y - halfExtends.y, center.z - halfExtends.z);
+        botLeft = Quaternion.Euler(0, 0, zRot) * new Vector3(-halfLength.x, -halfLength.y,-halfLength.z) + new Vector3(center.x, center.y,center.z);
+        topRight = Quaternion.Euler(0, 0, zRot) * new Vector3(halfLength.x, halfLength.y,halfLength.z) + new Vector3(center.x, center.y,center.z);
+
+        posMin = botLeft;  //NEED TO FIX THESE VALUES
         posMax = topRight;
         halfExtends = (posMax - posMin) / 2f;
 
@@ -85,11 +90,11 @@ public class ObjectBoundingBoxCollision3D : CollisionHull3D
 
     public void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        /*Gizmos.color = Color.green;
         Gizmos.DrawLine(botLeft, topLeft);
         Gizmos.DrawLine(botLeft, botRight);
         Gizmos.DrawLine(topLeft, topRight);
-        Gizmos.DrawLine(topRight, botRight);
+        Gizmos.DrawLine(topRight, botRight);*/
     }
 
 

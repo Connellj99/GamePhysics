@@ -182,7 +182,8 @@ public abstract class CollisionHull3D : MonoBehaviour
             colB.center.x += (float)(System.Math.Cos(angle) * circleDistance);
             colB.center.y += (float)(System.Math.Cos(angle) * circleDistance);*/
             float fDistance = Mathf.Sqrt(Vector3.Dot(distance, distance));
-            //Debug.Log("collision");
+            Debug.Log("Circ - collision");
+            
             return new CollisionInfo(colA,colB,distance/fDistance,radialSum - fDistance);
         }
         else
@@ -198,10 +199,10 @@ public abstract class CollisionHull3D : MonoBehaviour
         //Vector3 halfExtend = (rect.posMax - rect.posMin) / 2;
 
         // clamp(value, min, max) - limits value to the range min..max
-        /*Vector3 circleBox = new Vector3(
-           Mathf.Max(-halfExtend.x, Mathf.Min(circle.center.x, halfExtend.x)),
-           Mathf.Max(-halfExtend.y, Mathf.Min(circle.center.y, halfExtend.y)),
-           Mathf.Max(-halfExtend.z, Mathf.Min(circle.center.z, halfExtend.z)));*/
+        Vector3 circleBox = new Vector3(
+            Mathf.Max(rect.posMin.x + rect.center.x, Mathf.Min(circle.center.x, rect.posMax.x + rect.center.x)),
+            Mathf.Max(rect.posMin.y + rect.center.y, Mathf.Min(circle.center.y, rect.posMax.y + rect.center.y)),
+            Mathf.Max(rect.posMin.z + rect.center.z, Mathf.Min(circle.center.z, rect.posMax.z + rect.center.z)));
         // Find the closest point to the circle within the rectangle
         float closestX = Mathf.Clamp(circle.center.x, -rect.halfExtends.x, rect.halfExtends.x);
         float closestY = Mathf.Clamp(circle.center.y, -rect.halfExtends.y, rect.halfExtends.y);
@@ -213,10 +214,13 @@ public abstract class CollisionHull3D : MonoBehaviour
         //float distanceX = circle.center.x - closestX;
         //float distanceY = circle.center.y - closestY;
         //float distanceZ = circle.center.z - closestZ;
+        Vector3 disVec = circle.center - circleBox;
 
-        Vector3 distanceComplete = closestPoint - closestPoint; //possibly change to circle vox
+        //Vector3 distanceComplete = closestPoint - closestPoint; //possibly change to circle vox
         // If the distance is less than the circle's radius, an intersection occurs
-        float distSq = Vector3.Dot(distanceComplete, distanceComplete);
+        //float distSq = Vector3.Dot(distanceComplete, distanceComplete);
+        float distSq = Vector3.Dot(disVec, disVec);
+
         //float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY) + (distanceZ * distanceZ);
         float distance = Mathf.Sqrt(distSq);
         //Debug.DrawLine(closestPoint, circle.center);
@@ -224,7 +228,9 @@ public abstract class CollisionHull3D : MonoBehaviour
         if (distSq <= (circle.radius * circle.radius))
         {
             Debug.Log("square circ collision)");
-            return new CollisionInfo(circle, rect, -distanceComplete.normalized, circle.radius - distance);
+            //return new CollisionInfo(circle, rect, -distanceComplete.normalized, circle.radius - distance);
+            return new CollisionInfo(circle, rect, -disVec.normalized, circle.radius - distance);
+
 
         }
         return null;
@@ -236,7 +242,7 @@ public abstract class CollisionHull3D : MonoBehaviour
         //transform circle into obb space transform.InverseTransformPoint(cirecle.postion);
         //then do circle AABB      
         Vector3 halfExtend = (rect.posMax - rect.posMin) / 2;
-        Vector3 circleInOBB = rect.transform.InverseTransformPoint(circle.center);
+        Vector3 circleInOBB = rect.GetComponent<Particle3D>().GetWorldToObject().MultiplyPoint(circle.center);//rect.transform.InverseTransformPoint(circle.center);
         Vector3 circleBox = new Vector3(
             Mathf.Max(-halfExtend.x, Mathf.Min(circleInOBB.x, halfExtend.x)),
             Mathf.Max(-halfExtend.y, Mathf.Min(circleInOBB.y, halfExtend.y)),
@@ -251,6 +257,7 @@ public abstract class CollisionHull3D : MonoBehaviour
         if (distanceSQ <= (circle.radius * circle.radius))
         {
             //return true;
+            Debug.Log("circ obb collision");
             float distance = Mathf.Sqrt(distanceSQ);
             return new CollisionInfo(circle, rect, rect.transform.TransformVector(-distanceVec).normalized, circle.radius - distance);
 
@@ -279,14 +286,19 @@ public abstract class CollisionHull3D : MonoBehaviour
                     float minOverlap = Mathf.Min(x_overlap, y_overlap, z_overlap);
                     if (minOverlap == x_overlap)
                     {
+                        Debug.Log("Square square collision");
                         return new CollisionInfo(colA, colB, distance.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                     }
                     else if (minOverlap == y_overlap)
                     {
+                        Debug.Log("Square square collision");
+
                         return new CollisionInfo(colA, colB, distance.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                     }
                     else if (minOverlap == z_overlap)
                     {
+                        Debug.Log("Square square collision");
+
                         return new CollisionInfo(colA, colB, distance.z < 0.0f ? -Vector3.forward : Vector3.forward, z_overlap);
                     }
 
@@ -353,11 +365,13 @@ public abstract class CollisionHull3D : MonoBehaviour
                     {
                         if (x_overlap < y_overlap)
                         {
-                            return new CollisionInfo(colA, colB, AtoB.x < 0.0f ? -Vector2.right : Vector2.right, x_overlap);
+                            Debug.Log("ABB OBB");
+                            return new CollisionInfo(colA, colB, AtoB.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                         }
                         else
                         {
-                            return new CollisionInfo(colA, colB, AtoB.y < 0.0f ? -Vector2.up : Vector2.up, y_overlap);
+                            Debug.Log("ABB OBB");
+                            return new CollisionInfo(colA, colB, AtoB.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                         }
                     }
                 }
@@ -407,7 +421,7 @@ public abstract class CollisionHull3D : MonoBehaviour
 
             if (!(OBB1Max < OBB2Min && OBB2Max < OBB1Min))
             {
-                Vector2 AtoB = rectB.center - rectA.center;
+                Vector3 AtoB = rectB.center - rectA.center;
                 float x_overlap = rectA.halfExtends.x + rectB.halfExtends.x - Mathf.Abs(AtoB.x);
 
                 if (x_overlap > 0.0f)
@@ -417,11 +431,15 @@ public abstract class CollisionHull3D : MonoBehaviour
                     {
                         if (x_overlap < y_overlap)
                         {
-                            return new CollisionInfo(rectA, rectB, AtoB.x < 0.0f ? -Vector2.right : Vector2.right, x_overlap);
+                            Debug.Log("OBB OBB");
+
+                            return new CollisionInfo(rectA, rectB, AtoB.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                         }
                         else
                         {
-                            return new CollisionInfo(rectA, rectB, AtoB.y < 0.0f ? -Vector2.up : Vector2.up, y_overlap);
+                            Debug.Log("OBB OBB");
+
+                            return new CollisionInfo(rectA, rectB, AtoB.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                         }
                     }
                 }

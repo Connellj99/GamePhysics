@@ -26,22 +26,25 @@ public class PhysWorld : MonoBehaviour
         //loop through list, colliding based on enum
          foreach (var col in activeCollisions)
         {
+            col.GetComponent<Renderer>().material.color = Color.green;
             foreach (var col2 in activeCollisions)
             {
                 if (col != col2)
                 {
                     activeCollisions.RemoveAll(GameObject => GameObject == null);
-                    
                     var collisionInfo = col.GetComponent<CollisionHull3D>().CollisionTests(col2.GetComponent<CollisionHull3D>());
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {
-                       allCollisions.Add(collisionInfo);
+                       
+                        allCollisions.Add(collisionInfo);
+                        col.GetComponent<Renderer>().material.color = Color.red;
                     }
                 }
             }
         }
-        DoCollisions();
+        //DoCollisions();
+        
     }
 
     

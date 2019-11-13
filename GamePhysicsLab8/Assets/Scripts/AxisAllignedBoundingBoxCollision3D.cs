@@ -42,9 +42,9 @@ public class AxisAllignedBoundingBoxCollision3D : CollisionHull3D
         //bot = new Vector3(center.x, center.y - rectTopBot);
 
         //posMax = new Vector3(right.x, top.y);
-        posMax = new Vector3(center.x - halfExtends.x, center.y - halfExtends.y, center.z - halfExtends.z);
+        posMax = new Vector3(center.x + halfExtends.x, center.y + halfExtends.y, center.z + halfExtends.z);
         //posMin = new Vector3(left.x, bot.y);
-        posMin =new Vector3(center.x + halfExtends.x, center.y + halfExtends.y, center.z + halfExtends.z);
+        posMin = new Vector3(center.x - halfExtends.x, center.y - halfExtends.y, center.z - halfExtends.z);
 
         //leftTop = new Vector3(left.x, top.y);
         //rightBot = new Vector3(right.x, bot.y);
