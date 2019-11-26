@@ -1,12 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Jobs;
-using Unity.Jobs;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Transforms;
-using Unity.Mathematics;
 
 
 public struct cubeSpawnData : IComponentData
