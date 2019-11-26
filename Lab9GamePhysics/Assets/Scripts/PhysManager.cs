@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhysManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         PhysicDLL.CreatePhysicsWorld();
     }
