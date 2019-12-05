@@ -35,9 +35,13 @@ public class PlayerController : MonoBehaviour
         {
             particleScript.velocity.x -= 2 * deltaTime;
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.B))
         {
             particleScript.velocity *= 1 * deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            particleScript.velocity.y = 20f;
         }
     }
 }

@@ -26,7 +26,7 @@ public class PhysWorld : MonoBehaviour
         //loop through list, colliding based on enum
          foreach (var col in activeCollisions)
         {
-            col.GetComponent<Renderer>().material.color = Color.green;
+            //col.GetComponent<Renderer>().material.color = Color.green;
             foreach (var col2 in activeCollisions)
             {
                 if (col != col2)
@@ -38,7 +38,7 @@ public class PhysWorld : MonoBehaviour
                     {
                        
                         allCollisions.Add(collisionInfo);
-                        col.GetComponent<Renderer>().material.color = Color.red;
+                        //col.GetComponent<Renderer>().material.color = Color.red;
                     }
                 }
             }

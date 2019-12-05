@@ -5,7 +5,19 @@ using UnityEngine;
 public class Particle3D : MonoBehaviour
 {
     public GameObject shape;
-    //private const float kGravity = -0.012f;
+
+    //ForceGenValues
+    private const float kGravity = -9.8f;
+    private Vector3 surfaceNormalUnit = new Vector3(0.0f,0.0f, -1.0f);
+    private Vector3 f_opposing = new Vector3(1.0f, 0.0f,0.0f);
+    private const float frictionCoefficientStatic = 0.5f;
+    private const float frictionCoefficientKinetic = 0.5f;
+    private const float springRestingLength = 0.8f;
+    private const float springStiffnessCoefficient = 0.5f;
+    private Vector3 fluidVelocity = new Vector3(1.0f, 1.0f,1.0f);
+    private const float fluidDensity = 3.0f;
+    private const float objectAreaCrossSection = 3.0f;
+    private const float objectDragCoefficient = 0.5f;
 
     //torque vectors
     private Vector2 localSpace = new Vector2(2.0f, 2.0f);
@@ -37,7 +49,7 @@ public class Particle3D : MonoBehaviour
 
     public dropDownPhysics phystype;
     public Oscillation circtype;
-
+    public forcegen forcetype;
     public particleShape shapetype;
 
     [Range(0,Mathf.Infinity)]
@@ -88,7 +100,20 @@ public class Particle3D : MonoBehaviour
         SolidCylinder,
         SolidCone
     }
-    
+
+    public enum forcegen
+    {
+        Gravity,
+        Normal,
+        Sliding,
+        Friction_Static,
+        Friction_Kinetic,
+        Drag,
+        Spring,
+        SphereRoll,
+        None
+    }
+
     void updatePositionEulerExplicit(float deltaTime)
     {
 
@@ -224,7 +249,48 @@ public class Particle3D : MonoBehaviour
     void Update()
     {
         applyTorque();
+        if (forcetype == forcegen.Gravity)
+        {
+            AddForce(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up));
+        }
+        if (forcetype == forcegen.Normal)
+        {
+            AddForce(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit));
+        }
+        if (forcetype == forcegen.Sliding)
+        {
+            AddForce(ForceGen.GenerateForce_Sliding(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit)));
+        }
+        if (forcetype == forcegen.Friction_Static)
+        {
+            AddForce(ForceGen.GenerateForce_Friction_Static(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit), f_opposing, frictionCoefficientStatic));
+        }
+        if (forcetype == forcegen.Friction_Kinetic)
+        {
+            AddForce(ForceGen.GenerateForce_Friction_Kinetic(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit), velocity, frictionCoefficientKinetic));
+        }
+        if (forcetype == forcegen.Drag)
+        {
+            AddForce(ForceGen.GenerateForce_Sliding(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit)));
+            AddForce(ForceGen.GenerateForce_Drag(velocity, fluidVelocity, fluidDensity, objectAreaCrossSection, objectDragCoefficient));
 
+        }
+        if (forcetype == forcegen.Spring)
+        {
+            //AddForce(ForceGenerator.GenerateForce_Spring(position, anchorPosition, springRestingLength,springStiffnessCoefficient));
+            AddForce(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up));
+            AddForce(ForceGen.GenerateForce_Spring(position, -position, springRestingLength, springStiffnessCoefficient));
+        }
+        if (forcetype == forcegen.None)
+        {
+
+        }
+        if (forcetype == forcegen.SphereRoll)
+        {
+            AddForce(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up));
+            AddForce(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit));
+            AddForce(ForceGen.GenerateForce_Friction_Static(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit), f_opposing, frictionCoefficientStatic));
+        }
 
     }
 
