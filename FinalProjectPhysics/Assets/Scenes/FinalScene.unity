@@ -639,6 +639,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &771794851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7530664753919191985, guid: 51d164f9f759e6f45b6de158c878870b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6890677251489649188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &771794852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771794851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451ebde5b6bcdc2498959d19cfbf8120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 2
+  attachedShape: {fileID: 771794851}
+  center: {x: 0, y: 0, z: 0}
+  botLeft: {x: 0, y: 0, z: 0}
+  topRight: {x: 0, y: 0, z: 0}
+  xNormal: {x: 0, y: 0, z: 0}
+  yNormal: {x: 0, y: 0, z: 0}
+  halfLength: {x: 0.5, y: 0.5, z: 0.5}
+  halfExtends: {x: 0.5, y: 0.5, z: 0.5}
+  posMin: {x: 0, y: 0, z: 0}
+  posMax: {x: 0, y: 0, z: 0}
+  zRot: 0
 --- !u!1001 &1113791509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1559,5 +1589,6 @@ PrefabInstance:
       propertyPath: forcetype
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7530664753919191995, guid: 51d164f9f759e6f45b6de158c878870b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 51d164f9f759e6f45b6de158c878870b, type: 3}
