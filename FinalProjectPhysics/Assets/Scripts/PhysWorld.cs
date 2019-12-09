@@ -33,6 +33,14 @@ public class PhysWorld : MonoBehaviour
                 {
                     activeCollisions.RemoveAll(GameObject => GameObject == null);
                     var collisionInfo = col.GetComponent<CollisionHull3D>().CollisionTests(col2.GetComponent<CollisionHull3D>());
+                    if ((col.tag == "Wall" && col2.tag == "Wall"))
+                    {
+                        collisionInfo = null;
+                    }
+                    if ((col.tag == "Player" && col2.tag == "PlayerBody"))
+                    {
+                        collisionInfo = null;
+                    }
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {

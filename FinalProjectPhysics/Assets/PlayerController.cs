@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Particle3D particleScript;
+    public Vector3 forwardVector = new Vector3(0, 0, 1);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +23,25 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            particleScript.velocity.z -= 2 * deltaTime;
+            //particleScript.worldTransformationMatrix.MultiplyVector(forwardVector);
+            particleScript.velocity -= forwardVector * deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            particleScript.velocity.x += 2 * deltaTime;
+            //particleScript.velocity.x += 2 * deltaTime;
+            particleScript.angularAcceleration.y -= 2 * deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            particleScript.velocity.z += 2 * deltaTime;
+            particleScript.worldTransformationMatrix.MultiplyVector(-forwardVector);
+            particleScript.velocity += forwardVector * deltaTime;
+
         }
         if (Input.GetKey(KeyCode.D))
         {
-            particleScript.velocity.x -= 2 * deltaTime;
+            particleScript.angularAcceleration.y += 2 * deltaTime;
+
+            //particleScript.velocity.x -= 2 * deltaTime;
         }
         if (Input.GetKey(KeyCode.B))
         {

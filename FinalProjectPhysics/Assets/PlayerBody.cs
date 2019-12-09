@@ -17,5 +17,6 @@ public class PlayerBody : MonoBehaviour
     {
         bodyPhysics.position = player.GetComponent<Particle3D>().position;
         bodyPhysics.position.y = player.GetComponent<Particle3D>().position.y + bodyYOffset;
+        bodyPhysics.rotation.y = player.GetComponent<Particle3D>().rotation.y;
     }
 }
