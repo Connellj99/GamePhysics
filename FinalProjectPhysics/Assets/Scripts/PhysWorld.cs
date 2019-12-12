@@ -41,6 +41,14 @@ public class PhysWorld : MonoBehaviour
                     {
                         collisionInfo = null;
                     }
+                    if ((col.tag == "Goal" && col2.tag == "Wall"))
+                    {
+                        collisionInfo = null;
+                    }
+                    if ((col.tag == "Wall" && col2.tag == "Goal"))
+                    {
+                        collisionInfo = null;
+                    }
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {

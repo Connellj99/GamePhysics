@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            //particleScript.worldTransformationMatrix.MultiplyVector(forwardVector);
+            particleScript.worldTransformationMatrix.MultiplyVector(forwardVector);
             particleScript.velocity -= forwardVector * deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             particleScript.velocity.y = 20f;
+        }
+        if(Input.GetMouseButtonDown(0))
+        {
+
         }
     }
 }

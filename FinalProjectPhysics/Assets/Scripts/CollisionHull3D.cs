@@ -182,7 +182,7 @@ public abstract class CollisionHull3D : MonoBehaviour
             colB.center.x += (float)(System.Math.Cos(angle) * circleDistance);
             colB.center.y += (float)(System.Math.Cos(angle) * circleDistance);*/
             float fDistance = Mathf.Sqrt(Vector3.Dot(distance, distance));
-            Debug.Log("Circ - collision");
+            //Debug.Log("Circ - collision");
             
             return new CollisionInfo(colA,colB,distance/fDistance,radialSum - fDistance);
         }
@@ -227,7 +227,7 @@ public abstract class CollisionHull3D : MonoBehaviour
 
         if (distSq <= (circle.radius * circle.radius))
         {
-            Debug.Log("square circ collision)");
+            //Debug.Log("square circ collision)");
             //return new CollisionInfo(circle, rect, -distanceComplete.normalized, circle.radius - distance);
             return new CollisionInfo(circle, rect, -disVec.normalized, circle.radius - distance);
 
@@ -257,7 +257,7 @@ public abstract class CollisionHull3D : MonoBehaviour
         if (distanceSQ <= (circle.radius * circle.radius))
         {
             //return true;
-            Debug.Log("circ obb collision");
+            //Debug.Log("circ obb collision");
             float distance = Mathf.Sqrt(distanceSQ);
             return new CollisionInfo(circle, rect, rect.transform.TransformVector(-distanceVec).normalized, circle.radius - distance);
 
@@ -286,18 +286,18 @@ public abstract class CollisionHull3D : MonoBehaviour
                     float minOverlap = Mathf.Min(x_overlap, y_overlap, z_overlap);
                     if (minOverlap == x_overlap)
                     {
-                        Debug.Log("Square square collision");
+                        //Debug.Log("Square square collision");
                         return new CollisionInfo(colA, colB, distance.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                     }
                     else if (minOverlap == y_overlap)
                     {
-                        Debug.Log("Square square collision");
+                        //Debug.Log("Square square collision");
 
                         return new CollisionInfo(colA, colB, distance.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                     }
                     else if (minOverlap == z_overlap)
                     {
-                        Debug.Log("Square square collision");
+                        //Debug.Log("Square square collision");
 
                         return new CollisionInfo(colA, colB, distance.z < 0.0f ? -Vector3.forward : Vector3.forward, z_overlap);
                     }
@@ -365,12 +365,12 @@ public abstract class CollisionHull3D : MonoBehaviour
                     {
                         if (x_overlap < y_overlap)
                         {
-                            Debug.Log("ABB OBB");
+                            //Debug.Log("ABB OBB");
                             return new CollisionInfo(colA, colB, AtoB.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                         }
                         else
                         {
-                            Debug.Log("ABB OBB");
+                            //Debug.Log("ABB OBB");
                             return new CollisionInfo(colA, colB, AtoB.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                         }
                     }
@@ -431,13 +431,13 @@ public abstract class CollisionHull3D : MonoBehaviour
                     {
                         if (x_overlap < y_overlap)
                         {
-                            Debug.Log("OBB OBB");
+                            //Debug.Log("OBB OBB");
 
                             return new CollisionInfo(rectA, rectB, AtoB.x < 0.0f ? -Vector3.right : Vector3.right, x_overlap);
                         }
                         else
                         {
-                            Debug.Log("OBB OBB");
+                            //Debug.Log("OBB OBB");
 
                             return new CollisionInfo(rectA, rectB, AtoB.y < 0.0f ? -Vector3.up : Vector3.up, y_overlap);
                         }
