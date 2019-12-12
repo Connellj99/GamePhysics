@@ -82,8 +82,6 @@ public class PhysWorld : MonoBehaviour
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {
-                       
-                        allCollisions.Add(collisionInfo);
                         if ((col.tag == "Goal" && col2.tag == "Player"))
                         {
                             score++;
@@ -92,6 +90,8 @@ public class PhysWorld : MonoBehaviour
                         {
                             score++;
                         }
+                        allCollisions.Add(collisionInfo);
+                        
                         //col.GetComponent<Renderer>().material.color = Color.red;
                     }
                 }

@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        forwardVector = particleScript.rotation * (forwardVector);
         GetKeyChecks(Time.deltaTime);
         if(particleScript.position.y > 3)
         {
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            forwardVector = particleScript.rotation*(forwardVector);
+            //forwardVector = particleScript.rotation*(forwardVector);
             particleScript.velocity -= forwardVector * 25f;
             //particleScript.AddForceAtPoint(, forwardVector)
         }
