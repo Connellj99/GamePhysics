@@ -50,9 +50,12 @@ public class ForceGen : MonoBehaviour
     }
 
     // f_drag = (p * u^2 * area * coeff)/2    
-    public static Vector3 GenerateForce_Drag(Vector3 particleVelocity, Vector3 fluidVelocity, float fluidDensity, float objectArea_crossSection, float objectDragCoefficient)
+    public static Vector3 GenerateForce_Drag(Vector3 f_drag, float objectDragCoefficient)
     {
-        Vector3 f_drag = (particleVelocity * Vector3.Dot(fluidVelocity,fluidVelocity) * fluidDensity * objectArea_crossSection * objectDragCoefficient) * 0.5f;
+        //Vector3 f_drag = (particleVelocity * Vector3.Dot(fluidVelocity,fluidVelocity) * fluidDensity * objectArea_crossSection * objectDragCoefficient) * 0.5f;
+        objectDragCoefficient = 0.2f * objectDragCoefficient + 0.15f * (objectDragCoefficient * objectDragCoefficient);
+        f_drag.Normalize();
+        f_drag *= -objectDragCoefficient;
         return f_drag;
     }
     // f_spring = -coeff*(spring length - spring restingLength)

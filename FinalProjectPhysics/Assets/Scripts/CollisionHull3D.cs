@@ -64,6 +64,21 @@ public abstract class CollisionHull3D : MonoBehaviour
 
 
         }
+
+        public CollisionInfo(ObjectBoundingBoxCollision3D colA, AxisAllignedBoundingBoxCollision3D colB, Vector3 normal, float penetration)
+        {
+            RigidBodyA = colA.GetComponent<Particle3D>();
+            RigidBodyB = colB.GetComponent<Particle3D>();
+
+
+            RelativeVelocity = RigidBodyB.velocity - RigidBodyA.velocity;
+
+            contacts[0].normal = normal;
+            contacts[0].penetration = penetration;
+            contacts[0].restitution = Mathf.Min(RigidBodyA.restitution, RigidBodyB.restitution);
+
+
+        }
         public CollisionInfo(ObjectBoundingBoxCollision3D colA, ObjectBoundingBoxCollision3D colB, Vector3 normal, float penetration)
         {
             RigidBodyA = colA.GetComponent<Particle3D>();
@@ -313,7 +328,7 @@ public abstract class CollisionHull3D : MonoBehaviour
 
     static public CollisionInfo AABBOBB(AxisAllignedBoundingBoxCollision3D colA, ObjectBoundingBoxCollision3D colB)
     {
-      
+
         List<Vector3> allAxis = new List<Vector3>();
         allAxis.AddRange(colA.normAxis);
         allAxis.AddRange(colB.normAxis);
@@ -449,8 +464,7 @@ public abstract class CollisionHull3D : MonoBehaviour
         return null;
 
 
-    }   
+    }
 
 
-   
 }

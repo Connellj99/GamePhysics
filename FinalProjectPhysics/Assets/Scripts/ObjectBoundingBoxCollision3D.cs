@@ -26,6 +26,8 @@ public class ObjectBoundingBoxCollision3D : CollisionHull3D
     void Start()
     {
         GameObject.Find("ColManager").GetComponent<PhysWorld>().AddObject(attachedShape);
+        transform.eulerAngles = new Vector3(0, 0, zRot);
+
     }
 
     // Update is called once per frame
@@ -95,6 +97,8 @@ public class ObjectBoundingBoxCollision3D : CollisionHull3D
         Gizmos.DrawLine(botLeft, botRight);
         Gizmos.DrawLine(topLeft, topRight);
         Gizmos.DrawLine(topRight, botRight);*/
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawCube(transform.position, halfLength*2);
     }
 
 

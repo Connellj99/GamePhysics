@@ -37,7 +37,7 @@ public class CircleCollision3D : CollisionHull3D
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        float theta = 0;
+        /*float theta = 0;
         float x = radius * Mathf.Cos(theta);
         float y = radius * Mathf.Sin(theta);
         Vector3 pos = transform.position + new Vector3(x, y, 0);
@@ -51,7 +51,9 @@ public class CircleCollision3D : CollisionHull3D
             Gizmos.DrawLine(pos, newPos);
             pos = newPos;
         }
-        Gizmos.DrawLine(pos, lastPos);
+        Gizmos.DrawLine(pos, lastPos);*/
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, radius);
     }
 
     // Update is called once per frame

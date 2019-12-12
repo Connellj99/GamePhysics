@@ -110,7 +110,7 @@ public class Particle3D : MonoBehaviour
         Friction_Kinetic,
         Drag,
         Spring,
-        SphereRoll,
+        Ball,
         None
     }
 
@@ -181,9 +181,18 @@ public class Particle3D : MonoBehaviour
     //make an addforceatpoint
     //get center of mass, calc vector from center to point, then do an add force
 
-    public void AddForceAtPoint(Vector3 force, Vector3 point)
+    public void AddForceAtPoint(Vector3 forceNew, Vector3 point)
     {
         Vector3 forceVector = point - localCenterOfMass;
+        force += forceNew;
+        torque += Vector3.Cross(forceVector, forceNew);
+
+    }
+    public void AddForceLocal(Vector3 forceNew, Vector3 pointLocal)
+    {
+        Vector3 localToWorld = worldTransformationMatrix * pointLocal;
+        Vector3 forceToWorld = worldTransformationMatrix * forceNew;
+        AddForceAtPoint(localToWorld, forceToWorld);
 
     }
 
@@ -221,7 +230,11 @@ public class Particle3D : MonoBehaviour
     }
 
 
-   
+   public void GenerateGravity()
+    {
+        AddForce(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up));
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -267,12 +280,12 @@ public class Particle3D : MonoBehaviour
         }
         if (forcetype == forcegen.Friction_Kinetic)
         {
-            AddForce(ForceGen.GenerateForce_Friction_Kinetic(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit), velocity, frictionCoefficientKinetic));
+            AddForce(ForceGen.GenerateForce_Friction_Kinetic(Vector3.up,velocity*2,3.0f));
         }
         if (forcetype == forcegen.Drag)
         {
-            AddForce(ForceGen.GenerateForce_Sliding(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit)));
-            AddForce(ForceGen.GenerateForce_Drag(velocity, fluidVelocity, fluidDensity, objectAreaCrossSection, objectDragCoefficient));
+            //AddForce(ForceGen.GenerateForce_Sliding(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit)));
+            AddForce(ForceGen.GenerateForce_Drag(velocity,velocity.magnitude));
 
         }
         if (forcetype == forcegen.Spring)
@@ -285,10 +298,9 @@ public class Particle3D : MonoBehaviour
         {
 
         }
-        if (forcetype == forcegen.SphereRoll)
+        if (forcetype == forcegen.Ball)
         {
             AddForce(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up));
-            AddForce(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit));
             AddForce(ForceGen.GenerateForce_Friction_Static(ForceGen.GenerateForce_Normal(ForceGen.GenerateForce_Gravity(Mass, kGravity, Vector2.up), surfaceNormalUnit), f_opposing, frictionCoefficientStatic));
         }
 

@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PhysWorld : MonoBehaviour
 {
     public GameObject physManager;
+    public int score = 0;
+    public float timer = 180;
+    GameObject scoreUI;
+    GameObject timeUI;
     private List<CollisionHull3D.CollisionInfo> allCollisions = new List<CollisionHull3D.CollisionInfo>();
 
     public List<GameObject> activeCollisions;
@@ -12,13 +18,36 @@ public class PhysWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreUI = GameObject.Find("ScoreUI");
+        timeUI = GameObject.Find("TimeUI");
+
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-            
+        timer -= Time.deltaTime;
+        timeUI.GetComponent<Text>().text = "Time left: " + timer.ToString();
+        scoreUI.GetComponent<Text>().text = "Score: " + score.ToString();
+        if(score > 3)
+        {
+            Win();
+        }
+        if(timer <=0)
+        {
+            Loss();
+        }
+    }
+
+    void Win()
+    {
+        SceneManager.LoadScene("Win");
+
+    }
+    void Loss()
+    {
+        SceneManager.LoadScene("Loss");
+
     }
 
     void FixedUpdate()
@@ -49,11 +78,20 @@ public class PhysWorld : MonoBehaviour
                     {
                         collisionInfo = null;
                     }
+                    
                     //Debug.Log(collisionInfo); //very laggy
                     if (collisionInfo != null)
                     {
                        
                         allCollisions.Add(collisionInfo);
+                        if ((col.tag == "Goal" && col2.tag == "Player"))
+                        {
+                            score++;
+                        }
+                        if ((col.tag == "Player" && col2.tag == "Goal"))
+                        {
+                            score++;
+                        }
                         //col.GetComponent<Renderer>().material.color = Color.red;
                     }
                 }
@@ -145,3 +183,4 @@ public class PhysWorld : MonoBehaviour
 
 
 }
+

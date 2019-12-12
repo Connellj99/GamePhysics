@@ -49,6 +49,7 @@ public class AxisAllignedBoundingBoxCollision3D : CollisionHull3D
         //leftTop = new Vector3(left.x, top.y);
         //rightBot = new Vector3(right.x, bot.y);
         halfExtends = (posMax - posMin) / 2f;
+        transform.eulerAngles = new Vector3(0, 0, zRot);
 
     }
 
@@ -93,10 +94,8 @@ public class AxisAllignedBoundingBoxCollision3D : CollisionHull3D
         Gizmos.DrawLine(right,bot);
         Gizmos.DrawLine(left, top);
         Gizmos.DrawLine(top, bot);*/
-        Gizmos.DrawLine(halfExtends, posMax);
-        Gizmos.DrawLine(halfExtends, posMin);
-        Gizmos.DrawLine(halfExtends, posMax);
-        Gizmos.DrawLine(halfExtends, posMin);
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawCube(transform.position, halfExtends);
 
 
 

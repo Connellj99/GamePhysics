@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5731964837499754462}
   - component: {fileID: 5731964837499754463}
   - component: {fileID: 5731964837499754458}
+  - component: {fileID: 1280549059}
   m_Layer: 0
   m_Name: CubeHollow
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5731964837499754460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: 6, z: -9.93}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 110}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5f878a00fa3503447937f777ad9f519e, type: 2}
+  - {fileID: 2100000, guid: f78069e520df97c4f817228d46121159, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,12 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 5731964837499754460}
-  position: {x: 6, y: 6, z: -9.93}
-  velocity: {x: 0, y: 0, z: 2}
+  position: {x: 0, y: 0, z: -150}
+  velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   startTime: 0
   restitution: 0
-  rotation: {x: 0, y: 0, z: 0, w: 0}
+  rotation: {x: 0, y: 90, z: 0, w: 90}
   angularVelocity: {x: 0, y: 0, z: 0}
   angularAcceleration: {x: 0, y: 0, z: 0}
   torque: {x: 0, y: 0, z: 0}
@@ -137,7 +138,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 0
-  localCenterOfMass: {x: 6, y: 6, z: -9.93}
+  localCenterOfMass: {x: 0, y: 0, z: -150}
   worldCenterOfMass: {x: 0, y: 0, z: 0}
   localInertiaTensor:
     e00: 0
@@ -192,8 +193,9 @@ MonoBehaviour:
     e33: 0
   phystype: 1
   circtype: 1
+  forcetype: 8
   shapetype: 3
-  mass: 1
+  mass: 3.4028235e+38
   invMass: 0
 --- !u!114 &5731964837499754463
 MonoBehaviour:
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5731964837499754460}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 685251eaea035f24ea929aa8ced5a20e, type: 3}
   m_Name: 
@@ -233,3 +235,27 @@ MonoBehaviour:
   rectTopBot: 0
   rectLeftRight: 0
   halfExtends: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!114 &1280549059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5731964837499754460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451ebde5b6bcdc2498959d19cfbf8120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hullType: 2
+  attachedShape: {fileID: 5731964837499754460}
+  center: {x: 0, y: 0, z: 0}
+  botLeft: {x: 0, y: 0, z: 0}
+  topRight: {x: 0, y: 0, z: 0}
+  xNormal: {x: 0, y: 0, z: 0}
+  yNormal: {x: 0, y: 0, z: 0}
+  halfLength: {x: 0.5, y: 0.5, z: 0.5}
+  halfExtends: {x: 0.5, y: 0.5, z: 0.5}
+  posMin: {x: 0, y: 0, z: 0}
+  posMax: {x: 0, y: 0, z: 0}
+  zRot: 0
